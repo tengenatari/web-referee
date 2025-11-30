@@ -1,0 +1,18 @@
+database:
+  host: "localhost"
+  port: "5432"
+  username: "admin"
+  password: "admin"
+  name: "go"
+  ssl_mode: "disable"
+
+kafka:
+  host: "localhost"
+  port: 9092
+  games_info_topic_name: "games_info"
+
+redis:
+  host: "localhost"
+  port: 6379
+
+  
