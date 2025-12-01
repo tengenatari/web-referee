@@ -15,4 +15,7 @@ redis:
   host: "localhost"
   port: 6379
 
-  
+
+web:
+  host: "localhost"
+  port: "8000"

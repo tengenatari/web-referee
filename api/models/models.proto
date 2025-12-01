@@ -1,0 +1,4 @@
+syntax = "proto3";
+
+package  students.models.v1;
+option go_package = "github.com/tengenatari/web-referee/internal/pb/models";

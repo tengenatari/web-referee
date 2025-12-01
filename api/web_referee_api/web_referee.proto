@@ -1,0 +1,18 @@
+syntax = "proto3";
+package web.referee.service.v1;
+option go_package = "github.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_api";
+
+import "google/api/annotations.proto";
+
+service WebRefereeService {
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/health-check"
+      body: "*"
+    };
+  }
+}
+
+message HealthCheckResponse {}
+
+message HealthCheckRequest {}
