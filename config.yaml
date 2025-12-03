@@ -1,10 +1,11 @@
 database:
   host: "localhost"
-  port: "5432"
+  port: 5432
   username: "admin"
   password: "admin"
   name: "go"
   ssl_mode: "disable"
+  migrations_path: "internal/storage/pgstorage/migrations"
 
 kafka:
   host: "localhost"
@@ -18,4 +19,4 @@ redis:
 
 web:
   host: "localhost"
-  port: "8000"
+  port: 8000

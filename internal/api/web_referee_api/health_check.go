@@ -6,7 +6,7 @@ import (
 )
 
 func (s *WebRefereeServiceAPI) HealthCheck(ctx context.Context, req *web_referee_api.HealthCheckRequest) (*web_referee_api.HealthCheckResponse, error) {
-	_, err := s.webRefereeService.HealthCheck(ctx)
+	err := s.webRefereeService.HealthCheck(ctx)
 	if err != nil {
 		return &web_referee_api.HealthCheckResponse{}, err
 	}

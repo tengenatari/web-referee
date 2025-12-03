@@ -6,7 +6,7 @@ import (
 )
 
 type webRefereeService interface {
-	HealthCheck(ctx context.Context) (struct{}, error)
+	HealthCheck(ctx context.Context) error
 }
 
 type WebRefereeServiceAPI struct {
