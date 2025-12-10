@@ -41,7 +41,7 @@ func NewPGStorge(connString string, migrationsPath string) (*PGstorage, error) {
 func applyMigrations(connString, migrationsPath string) error {
 
 	m, err := migrate.New(
-		"file://"+migrationsPath,
+		fmt.Sprintf("file://%s", migrationsPath),
 		connString,
 	)
 	if err != nil {

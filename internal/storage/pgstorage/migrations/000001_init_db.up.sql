@@ -1,7 +1,9 @@
-CREATE TABLE IF NOT EXISTS Users
-(
-    id                 SERIAL PRIMARY KEY,
-    passwd_hashed_salt VARCHAR(1023) NOT NULL,
-    tigr_id            VARCHAR(30)   NOT NULL,
-    rating             INT
-)
+DO $$
+    DECLARE
+        i INTEGER;
+    BEGIN
+        FOR i IN 1..512 LOOP
+                EXECUTE format('CREATE SCHEMA IF NOT EXISTS schema_%s', LPAD(i::text, 3, '0'));
+            END LOOP;
+    END $$;
+

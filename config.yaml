@@ -5,7 +5,7 @@ database:
   password: "admin"
   name: "go"
   ssl_mode: "disable"
-  migrations_path: "internal/storage/pgstorage/migrations"
+  migrations_path: "./internal/storage/pgstorage/migrations"
 
 kafka:
   host: "localhost"

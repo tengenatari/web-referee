@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS public.tournaments (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
