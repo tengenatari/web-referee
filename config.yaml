@@ -6,6 +6,7 @@ database:
   name: "go"
   ssl_mode: "disable"
   migrations_path: "./internal/storage/pgstorage/migrations"
+  shards: 512
 
 kafka:
   host: "localhost"

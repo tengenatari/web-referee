@@ -2,6 +2,6 @@ package web_referee_service
 
 import "golang.org/x/net/context"
 
-func (s *WebRefereeService) HealthCheck(ctx context.Context) error {
+func (service *WebRefereeService) HealthCheck(ctx context.Context) error {
 	return nil
 }

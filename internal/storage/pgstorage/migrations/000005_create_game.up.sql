@@ -11,9 +11,7 @@ DO $$
              result_black INT,
              result_white INT,
              white INT,
-             black INT,
-             FOREIGN KEY (white) REFERENCES schema_%s.players(id),
-             FOREIGN KEY (black) REFERENCES schema_%s.players(id)
+             black INT
         )', LPAD(i::text, 3, '0'), LPAD(i::text, 3, '0'), LPAD(i::text, 3, '0'));
             END LOOP;
     END $$;

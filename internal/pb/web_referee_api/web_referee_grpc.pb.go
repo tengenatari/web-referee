@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	WebRefereeService_HealthCheck_FullMethodName = "/web.referee.service.v1.WebRefereeService/HealthCheck"
+	WebRefereeService_CreateUser_FullMethodName  = "/web.referee.service.v1.WebRefereeService/CreateUser"
 )
 
 // WebRefereeServiceClient is the client API for WebRefereeService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WebRefereeServiceClient interface {
 	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 }
 
 type webRefereeServiceClient struct {
@@ -47,11 +49,22 @@ func (c *webRefereeServiceClient) HealthCheck(ctx context.Context, in *HealthChe
 	return out, nil
 }
 
+func (c *webRefereeServiceClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUserResponse)
+	err := c.cc.Invoke(ctx, WebRefereeService_CreateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WebRefereeServiceServer is the server API for WebRefereeService service.
 // All implementations must embed UnimplementedWebRefereeServiceServer
 // for forward compatibility.
 type WebRefereeServiceServer interface {
 	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	mustEmbedUnimplementedWebRefereeServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedWebRefereeServiceServer struct{}
 
 func (UnimplementedWebRefereeServiceServer) HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method HealthCheck not implemented")
+}
+func (UnimplementedWebRefereeServiceServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateUser not implemented")
 }
 func (UnimplementedWebRefereeServiceServer) mustEmbedUnimplementedWebRefereeServiceServer() {}
 func (UnimplementedWebRefereeServiceServer) testEmbeddedByValue()                           {}
@@ -104,6 +120,24 @@ func _WebRefereeService_HealthCheck_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WebRefereeService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebRefereeServiceServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WebRefereeService_CreateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebRefereeServiceServer).CreateUser(ctx, req.(*CreateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WebRefereeService_ServiceDesc is the grpc.ServiceDesc for WebRefereeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var WebRefereeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HealthCheck",
 			Handler:    _WebRefereeService_HealthCheck_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _WebRefereeService_CreateUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

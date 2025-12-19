@@ -37,6 +37,56 @@
           "WebRefereeService"
         ]
       }
+    },
+    "/api/v1/user": {
+      "post": {
+        "operationId": "WebRefereeService_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tigrId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "WebRefereeService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -67,6 +117,9 @@
           }
         }
       }
+    },
+    "v1CreateUserResponse": {
+      "type": "object"
     },
     "v1HealthCheckResponse": {
       "type": "object"

@@ -21,6 +21,7 @@ type DatabaseConfig struct {
 	DBName         string `yaml:"name"`
 	SSLMode        string `yaml:"ssl_mode"`
 	MigrationsPath string `yaml:"migrations_path"`
+	Shards         uint32 `yaml:"shards"`
 }
 
 type KafkaConfig struct {

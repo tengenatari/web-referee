@@ -10,8 +10,24 @@ service WebRefereeService {
       get: "/api/v1/health-check"
     };
   }
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse){
+    option (google.api.http) = {
+      post: "/api/v1/user"
+    };
+  }
 }
 
 message HealthCheckResponse {}
 
 message HealthCheckRequest {}
+
+message CreateUserRequest {
+  int64 id = 1;
+  string name = 2;
+  string tigr_id = 3;
+  int64  rating = 4;
+}
+
+message CreateUserResponse {
+
+}

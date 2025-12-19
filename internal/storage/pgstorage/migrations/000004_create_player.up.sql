@@ -8,9 +8,7 @@ DO $$
                 id SERIAL PRIMARY KEY,
                 mac_mahon INT NOT NULL,
                 tournament_id INT,
-                user_id INT,
-                FOREIGN KEY (tournament_id) REFERENCES schema_%s.tournaments(id),
-                FOREIGN KEY (user_id) REFERENCES schema_%s.users(id)
+                user_id INT
              )', LPAD(i::text, 3, '0'), LPAD(i::text, 3, '0'), LPAD(i::text, 3, '0'));
         END LOOP;
     END $$;

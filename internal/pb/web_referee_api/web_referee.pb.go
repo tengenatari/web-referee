@@ -94,15 +94,127 @@ func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{1}
 }
 
+type CreateUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	TigrId        string                 `protobuf:"bytes,3,opt,name=tigr_id,json=tigrId,proto3" json:"tigr_id,omitempty"`
+	Rating        int64                  `protobuf:"varint,4,opt,name=rating,proto3" json:"rating,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserRequest) Reset() {
+	*x = CreateUserRequest{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserRequest) ProtoMessage() {}
+
+func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
+func (*CreateUserRequest) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateUserRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CreateUserRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetTigrId() string {
+	if x != nil {
+		return x.TigrId
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetRating() int64 {
+	if x != nil {
+		return x.Rating
+	}
+	return 0
+}
+
+type CreateUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserResponse) Reset() {
+	*x = CreateUserResponse{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserResponse) ProtoMessage() {}
+
+func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserResponse.ProtoReflect.Descriptor instead.
+func (*CreateUserResponse) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{3}
+}
+
 var File_web_referee_api_web_referee_proto protoreflect.FileDescriptor
 
 const file_web_referee_api_web_referee_proto_rawDesc = "" +
 	"\n" +
 	"!web_referee_api/web_referee.proto\x12\x16web.referee.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x15\n" +
 	"\x13HealthCheckResponse\"\x14\n" +
-	"\x12HealthCheckRequest2\x9a\x01\n" +
+	"\x12HealthCheckRequest\"h\n" +
+	"\x11CreateUserRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x17\n" +
+	"\atigr_id\x18\x03 \x01(\tR\x06tigrId\x12\x16\n" +
+	"\x06rating\x18\x04 \x01(\x03R\x06rating\"\x14\n" +
+	"\x12CreateUserResponse2\x95\x02\n" +
 	"\x11WebRefereeService\x12\x84\x01\n" +
-	"\vHealthCheck\x12*.web.referee.service.v1.HealthCheckRequest\x1a+.web.referee.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/health-checkBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
+	"\vHealthCheck\x12*.web.referee.service.v1.HealthCheckRequest\x1a+.web.referee.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/health-check\x12y\n" +
+	"\n" +
+	"CreateUser\x12).web.referee.service.v1.CreateUserRequest\x1a*.web.referee.service.v1.CreateUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\"\f/api/v1/userBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
 
 var (
 	file_web_referee_api_web_referee_proto_rawDescOnce sync.Once
@@ -116,16 +228,20 @@ func file_web_referee_api_web_referee_proto_rawDescGZIP() []byte {
 	return file_web_referee_api_web_referee_proto_rawDescData
 }
 
-var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_web_referee_api_web_referee_proto_goTypes = []any{
 	(*HealthCheckResponse)(nil), // 0: web.referee.service.v1.HealthCheckResponse
 	(*HealthCheckRequest)(nil),  // 1: web.referee.service.v1.HealthCheckRequest
+	(*CreateUserRequest)(nil),   // 2: web.referee.service.v1.CreateUserRequest
+	(*CreateUserResponse)(nil),  // 3: web.referee.service.v1.CreateUserResponse
 }
 var file_web_referee_api_web_referee_proto_depIdxs = []int32{
 	1, // 0: web.referee.service.v1.WebRefereeService.HealthCheck:input_type -> web.referee.service.v1.HealthCheckRequest
-	0, // 1: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: web.referee.service.v1.WebRefereeService.CreateUser:input_type -> web.referee.service.v1.CreateUserRequest
+	0, // 2: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
+	3, // 3: web.referee.service.v1.WebRefereeService.CreateUser:output_type -> web.referee.service.v1.CreateUserResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -142,7 +258,7 @@ func file_web_referee_api_web_referee_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_web_referee_api_web_referee_proto_rawDesc), len(file_web_referee_api_web_referee_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
