@@ -1,6 +1,7 @@
 package web_referee_producer
 
 import (
+	"encoding/json"
 	"time"
 
 	"context"
@@ -36,7 +37,7 @@ func NewWebRefereeProducer(broker string, topic string) *WebRefereeProducer {
 
 func (p *WebRefereeProducer) ProduceUser(ctx context.Context, user models.User) error {
 
-	val, err := kafka.Marshal(user)
+	val, err := json.Marshal(user)
 	if err != nil {
 		return errors.Wrap(err, "failed to marshal user")
 	}
