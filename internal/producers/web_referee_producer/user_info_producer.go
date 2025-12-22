@@ -37,6 +37,12 @@ func NewWebRefereeProducer(broker string, topic string) *WebRefereeProducer {
 
 func (p *WebRefereeProducer) ProduceUser(ctx context.Context, user models.User) error {
 
+	defer func(writer *kafka.Writer) {
+		err := writer.Close()
+		if err != nil {
+			err = errors.WithMessage(err, "error closing writer")
+		}
+	}(p.writer)
 	val, err := json.Marshal(user)
 	if err != nil {
 		return errors.Wrap(err, "failed to marshal user")
