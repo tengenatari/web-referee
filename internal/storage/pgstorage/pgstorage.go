@@ -13,12 +13,12 @@ import (
 	"golang.org/x/net/context"
 )
 
-type PGstorage struct {
+type WebRefereeStorage struct {
 	db     *pgxpool.Pool
 	shards uint32
 }
 
-func NewPGStorge(connString string, migrationsPath string, shards uint32) (*PGstorage, error) {
+func NewWebRefereeStorge(connString string, migrationsPath string, shards uint32) (*WebRefereeStorage, error) {
 	err := applyMigrations(connString, migrationsPath)
 
 	if err != nil {
@@ -34,7 +34,7 @@ func NewPGStorge(connString string, migrationsPath string, shards uint32) (*PGst
 	if err != nil {
 		return nil, errors.Wrap(err, "Failed to connect to database")
 	}
-	storage := &PGstorage{
+	storage := &WebRefereeStorage{
 		db:     db,
 		shards: shards,
 	}
@@ -67,7 +67,7 @@ func applyMigrations(connString, migrationsPath string) error {
 	return nil
 }
 
-func (storage *PGstorage) execQuery(ctx context.Context, query squirrel.Sqlizer) error {
+func (storage *WebRefereeStorage) execQuery(ctx context.Context, query squirrel.Sqlizer) error {
 	queryText, args, err := query.ToSql()
 	if err != nil {
 		return errors.Wrap(err, "Generate query error")
@@ -79,7 +79,7 @@ func (storage *PGstorage) execQuery(ctx context.Context, query squirrel.Sqlizer)
 	return err
 }
 
-func (storage *PGstorage) query(ctx context.Context, query squirrel.Sqlizer) (pgx.Rows, error) {
+func (storage *WebRefereeStorage) query(ctx context.Context, query squirrel.Sqlizer) (pgx.Rows, error) {
 	queryText, args, err := query.ToSql()
 	if err != nil {
 		return nil, errors.Wrap(err, "Generate query error")

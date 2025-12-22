@@ -10,12 +10,18 @@ type WebRefereeStorage interface {
 	CreateUser(ctx context.Context, user *models.User) error
 }
 
-type WebRefereeService struct {
-	webRefereeStorage WebRefereeStorage
+type WebRefereeProducer interface {
+	ProduceUser(ctx context.Context, user models.User) error
 }
 
-func NewWebRefereeService(webRefereeStorage *pgstorage.PGstorage) *WebRefereeService {
+type WebRefereeService struct {
+	webRefereeStorage  WebRefereeStorage
+	webRefereeProducer WebRefereeProducer
+}
+
+func NewWebRefereeService(webRefereeStorage *pgstorage.WebRefereeStorage, producer WebRefereeProducer) *WebRefereeService {
 	return &WebRefereeService{
-		webRefereeStorage: webRefereeStorage,
+		webRefereeStorage:  webRefereeStorage,
+		webRefereeProducer: producer,
 	}
 }

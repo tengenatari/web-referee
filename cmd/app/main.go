@@ -13,7 +13,8 @@ func main() {
 		panic(fmt.Sprintf("Error loading config: %v", err))
 	}
 	storage := bootstrap.InitPGStorage(cfg)
-	service := bootstrap.InitWebRefereeService(storage, cfg)
+	producer := bootstrap.InitMessageProducer(cfg)
+	service := bootstrap.InitWebRefereeService(storage, producer)
 	api := bootstrap.InitWebRefereeServiceAPI(service)
 
 	bootstrap.AppRun(api, cfg)

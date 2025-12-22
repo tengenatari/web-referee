@@ -25,8 +25,9 @@ type DatabaseConfig struct {
 }
 
 type KafkaConfig struct {
-	Host string `yaml:"host"`
-	Port int    `yaml:"port"`
+	Host  string `yaml:"host"`
+	Port  int    `yaml:"port"`
+	Topic string `yaml:"topic"`
 }
 
 type Web struct {
