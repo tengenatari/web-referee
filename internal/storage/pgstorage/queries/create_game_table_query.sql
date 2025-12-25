@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS public.games (
-     id SERIAL PRIMARY KEY,
+     id UUID UNIQUE NOT NULL,
      game_url TEXT NOT NULL,
      tour_num INT NOT NULL ,
      result_black INT,

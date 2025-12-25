@@ -31,13 +31,13 @@ func (storage *WebRefereeStorage) CreateUser(ctx context.Context, user *models.U
 		TigrId: user.TigrId,
 	}
 	shard, err := storage.getUserShard(&userMapped)
-
 	if err != nil {
-		return err
+		return errors.Wrap(err, "error getting user shard")
 	}
+	fmt.Println(userUuid, shard)
 
 	q := squirrel.Insert(fmt.Sprintf("schema_%03d.%s", shard, UserTable)).
-		Columns(UserColumnRating, UserColumnName, UserTigrId).Values(user.Rating, user.Name, user.TigrId).
+		Columns(UserId, UserColumnRating, UserColumnName, UserTigrId).Values(userMapped.Id, userMapped.Rating, userMapped.Name, userMapped.TigrId).
 		PlaceholderFormat(squirrel.Dollar)
 	err = storage.execQuery(ctx, q)
 	if err != nil {

@@ -6,17 +6,17 @@ import (
 	"golang.org/x/net/context"
 )
 
-type webRefereeService interface {
+type WebRefereeService interface {
 	HealthCheck(ctx context.Context) error
 	CreateUser(ctx context.Context, user *models.User) error
 }
 
 type WebRefereeServiceAPI struct {
 	web_referee_api.UnimplementedWebRefereeServiceServer
-	webRefereeService webRefereeService
+	webRefereeService WebRefereeService
 }
 
-func NewWebRefereeServiceAPI(webRefereeService webRefereeService) *WebRefereeServiceAPI {
+func NewWebRefereeServiceAPI(webRefereeService WebRefereeService) *WebRefereeServiceAPI {
 	return &WebRefereeServiceAPI{
 		webRefereeService: webRefereeService,
 	}

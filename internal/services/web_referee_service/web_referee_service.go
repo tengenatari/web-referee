@@ -2,7 +2,6 @@ package web_referee_service
 
 import (
 	"github.com/tengenatari/web-referee/internal/models"
-	"github.com/tengenatari/web-referee/internal/storage/pgstorage"
 	"golang.org/x/net/context"
 )
 
@@ -19,7 +18,7 @@ type WebRefereeService struct {
 	webRefereeProducer WebRefereeProducer
 }
 
-func NewWebRefereeService(webRefereeStorage *pgstorage.WebRefereeStorage, producer WebRefereeProducer) *WebRefereeService {
+func NewWebRefereeService(webRefereeStorage WebRefereeStorage, producer WebRefereeProducer) *WebRefereeService {
 	return &WebRefereeService{
 		webRefereeStorage:  webRefereeStorage,
 		webRefereeProducer: producer,

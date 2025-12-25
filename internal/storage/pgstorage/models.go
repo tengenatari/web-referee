@@ -15,6 +15,7 @@ type User struct {
 }
 
 const (
+	UserId           = "id"
 	UserTable        = "users"
 	UserColumnRating = "rating"
 	UserColumnName   = "name"

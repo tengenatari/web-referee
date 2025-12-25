@@ -5,7 +5,7 @@ DO $$
         FOR i IN 1..512 LOOP
                 EXECUTE format('
             CREATE TABLE IF NOT EXISTS schema_%s.players (
-                id SERIAL PRIMARY KEY,
+                id UUID UNIQUE NOT NULL,
                 mac_mahon INT NOT NULL,
                 tournament_id INT,
                 user_id INT

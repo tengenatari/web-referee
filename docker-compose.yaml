@@ -24,12 +24,17 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: go
+      MAX_LOCKS_PER_TRANSACTION: 10396
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "max_locks_per_transaction=10396"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U go" ]
+      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 5s
       timeout: 3s
       retries: 3
