@@ -96,10 +96,9 @@ func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
 
 type CreateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	TigrId        string                 `protobuf:"bytes,3,opt,name=tigr_id,json=tigrId,proto3" json:"tigr_id,omitempty"`
-	Rating        int64                  `protobuf:"varint,4,opt,name=rating,proto3" json:"rating,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	TigrId        string                 `protobuf:"bytes,2,opt,name=tigr_id,json=tigrId,proto3" json:"tigr_id,omitempty"`
+	Rating        int64                  `protobuf:"varint,3,opt,name=rating,proto3" json:"rating,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -132,13 +131,6 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CreateUserRequest) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
 }
 
 func (x *CreateUserRequest) GetName() string {
@@ -198,23 +190,217 @@ func (*CreateUserResponse) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{3}
 }
 
+type CreateTournamentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTournamentResponse) Reset() {
+	*x = CreateTournamentResponse{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTournamentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTournamentResponse) ProtoMessage() {}
+
+func (x *CreateTournamentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTournamentResponse.ProtoReflect.Descriptor instead.
+func (*CreateTournamentResponse) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{4}
+}
+
+type CreateTournamentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Date          string                 `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTournamentRequest) Reset() {
+	*x = CreateTournamentRequest{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTournamentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTournamentRequest) ProtoMessage() {}
+
+func (x *CreateTournamentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTournamentRequest.ProtoReflect.Descriptor instead.
+func (*CreateTournamentRequest) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateTournamentRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateTournamentRequest) GetDate() string {
+	if x != nil {
+		return x.Date
+	}
+	return ""
+}
+
+type CreatePlayerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TournamentId  string                 `protobuf:"bytes,1,opt,name=TournamentId,proto3" json:"TournamentId,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	MacMahon      int64                  `protobuf:"varint,3,opt,name=MacMahon,proto3" json:"MacMahon,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatePlayerRequest) Reset() {
+	*x = CreatePlayerRequest{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePlayerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePlayerRequest) ProtoMessage() {}
+
+func (x *CreatePlayerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePlayerRequest.ProtoReflect.Descriptor instead.
+func (*CreatePlayerRequest) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreatePlayerRequest) GetTournamentId() string {
+	if x != nil {
+		return x.TournamentId
+	}
+	return ""
+}
+
+func (x *CreatePlayerRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreatePlayerRequest) GetMacMahon() int64 {
+	if x != nil {
+		return x.MacMahon
+	}
+	return 0
+}
+
+type CreatePlayerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatePlayerResponse) Reset() {
+	*x = CreatePlayerResponse{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePlayerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePlayerResponse) ProtoMessage() {}
+
+func (x *CreatePlayerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePlayerResponse.ProtoReflect.Descriptor instead.
+func (*CreatePlayerResponse) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{7}
+}
+
 var File_web_referee_api_web_referee_proto protoreflect.FileDescriptor
 
 const file_web_referee_api_web_referee_proto_rawDesc = "" +
 	"\n" +
 	"!web_referee_api/web_referee.proto\x12\x16web.referee.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x15\n" +
 	"\x13HealthCheckResponse\"\x14\n" +
-	"\x12HealthCheckRequest\"h\n" +
-	"\x11CreateUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x17\n" +
-	"\atigr_id\x18\x03 \x01(\tR\x06tigrId\x12\x16\n" +
-	"\x06rating\x18\x04 \x01(\x03R\x06rating\"\x14\n" +
-	"\x12CreateUserResponse2\x95\x02\n" +
+	"\x12HealthCheckRequest\"X\n" +
+	"\x11CreateUserRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
+	"\atigr_id\x18\x02 \x01(\tR\x06tigrId\x12\x16\n" +
+	"\x06rating\x18\x03 \x01(\x03R\x06rating\"\x14\n" +
+	"\x12CreateUserResponse\"\x1a\n" +
+	"\x18CreateTournamentResponse\"A\n" +
+	"\x17CreateTournamentRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04date\x18\x02 \x01(\tR\x04date\"m\n" +
+	"\x13CreatePlayerRequest\x12\"\n" +
+	"\fTournamentId\x18\x01 \x01(\tR\fTournamentId\x12\x16\n" +
+	"\x06UserId\x18\x02 \x01(\tR\x06UserId\x12\x1a\n" +
+	"\bMacMahon\x18\x03 \x01(\x03R\bMacMahon\"\x16\n" +
+	"\x14CreatePlayerResponse2\xad\x04\n" +
 	"\x11WebRefereeService\x12\x84\x01\n" +
 	"\vHealthCheck\x12*.web.referee.service.v1.HealthCheckRequest\x1a+.web.referee.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/health-check\x12y\n" +
 	"\n" +
-	"CreateUser\x12).web.referee.service.v1.CreateUserRequest\x1a*.web.referee.service.v1.CreateUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\"\f/api/v1/userBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
+	"CreateUser\x12).web.referee.service.v1.CreateUserRequest\x1a*.web.referee.service.v1.CreateUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\"\f/api/v1/user\x12\x91\x01\n" +
+	"\x10CreateTournament\x12/.web.referee.service.v1.CreateTournamentRequest\x1a0.web.referee.service.v1.CreateTournamentResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x12/api/v1/tournament\x12\x81\x01\n" +
+	"\fCreatePlayer\x12+.web.referee.service.v1.CreatePlayerRequest\x1a,.web.referee.service.v1.CreatePlayerResponse\"\x16\x82\xd3\xe4\x93\x02\x10\"\x0e/api/v1/playerBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
 
 var (
 	file_web_referee_api_web_referee_proto_rawDescOnce sync.Once
@@ -228,20 +414,28 @@ func file_web_referee_api_web_referee_proto_rawDescGZIP() []byte {
 	return file_web_referee_api_web_referee_proto_rawDescData
 }
 
-var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_web_referee_api_web_referee_proto_goTypes = []any{
-	(*HealthCheckResponse)(nil), // 0: web.referee.service.v1.HealthCheckResponse
-	(*HealthCheckRequest)(nil),  // 1: web.referee.service.v1.HealthCheckRequest
-	(*CreateUserRequest)(nil),   // 2: web.referee.service.v1.CreateUserRequest
-	(*CreateUserResponse)(nil),  // 3: web.referee.service.v1.CreateUserResponse
+	(*HealthCheckResponse)(nil),      // 0: web.referee.service.v1.HealthCheckResponse
+	(*HealthCheckRequest)(nil),       // 1: web.referee.service.v1.HealthCheckRequest
+	(*CreateUserRequest)(nil),        // 2: web.referee.service.v1.CreateUserRequest
+	(*CreateUserResponse)(nil),       // 3: web.referee.service.v1.CreateUserResponse
+	(*CreateTournamentResponse)(nil), // 4: web.referee.service.v1.CreateTournamentResponse
+	(*CreateTournamentRequest)(nil),  // 5: web.referee.service.v1.CreateTournamentRequest
+	(*CreatePlayerRequest)(nil),      // 6: web.referee.service.v1.CreatePlayerRequest
+	(*CreatePlayerResponse)(nil),     // 7: web.referee.service.v1.CreatePlayerResponse
 }
 var file_web_referee_api_web_referee_proto_depIdxs = []int32{
 	1, // 0: web.referee.service.v1.WebRefereeService.HealthCheck:input_type -> web.referee.service.v1.HealthCheckRequest
 	2, // 1: web.referee.service.v1.WebRefereeService.CreateUser:input_type -> web.referee.service.v1.CreateUserRequest
-	0, // 2: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
-	3, // 3: web.referee.service.v1.WebRefereeService.CreateUser:output_type -> web.referee.service.v1.CreateUserResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	5, // 2: web.referee.service.v1.WebRefereeService.CreateTournament:input_type -> web.referee.service.v1.CreateTournamentRequest
+	6, // 3: web.referee.service.v1.WebRefereeService.CreatePlayer:input_type -> web.referee.service.v1.CreatePlayerRequest
+	0, // 4: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
+	3, // 5: web.referee.service.v1.WebRefereeService.CreateUser:output_type -> web.referee.service.v1.CreateUserResponse
+	4, // 6: web.referee.service.v1.WebRefereeService.CreateTournament:output_type -> web.referee.service.v1.CreateTournamentResponse
+	7, // 7: web.referee.service.v1.WebRefereeService.CreatePlayer:output_type -> web.referee.service.v1.CreatePlayerResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -258,7 +452,7 @@ func file_web_referee_api_web_referee_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_web_referee_api_web_referee_proto_rawDesc), len(file_web_referee_api_web_referee_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

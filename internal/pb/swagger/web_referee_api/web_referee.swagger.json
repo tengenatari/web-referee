@@ -38,6 +38,85 @@
         ]
       }
     },
+    "/api/v1/player": {
+      "post": {
+        "operationId": "WebRefereeService_CreatePlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreatePlayerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "TournamentId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "UserId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "MacMahon",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "WebRefereeService"
+        ]
+      }
+    },
+    "/api/v1/tournament": {
+      "post": {
+        "operationId": "WebRefereeService_CreateTournament",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTournamentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WebRefereeService"
+        ]
+      }
+    },
     "/api/v1/user": {
       "post": {
         "operationId": "WebRefereeService_CreateUser",
@@ -56,13 +135,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
           {
             "name": "name",
             "in": "query",
@@ -117,6 +189,12 @@
           }
         }
       }
+    },
+    "v1CreatePlayerResponse": {
+      "type": "object"
+    },
+    "v1CreateTournamentResponse": {
+      "type": "object"
     },
     "v1CreateUserResponse": {
       "type": "object"

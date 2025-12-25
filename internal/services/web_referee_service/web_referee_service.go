@@ -7,6 +7,8 @@ import (
 
 type WebRefereeStorage interface {
 	CreateUser(ctx context.Context, user *models.User) error
+	CreateTournament(ctx context.Context, tournament *models.Tournament) error
+	CreatePlayer(ctx context.Context, player *models.Player) error
 }
 
 type WebRefereeProducer interface {

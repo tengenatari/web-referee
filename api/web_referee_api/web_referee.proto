@@ -15,6 +15,16 @@ service WebRefereeService {
       post: "/api/v1/user"
     };
   }
+  rpc CreateTournament(CreateTournamentRequest) returns (CreateTournamentResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/tournament"
+    };
+  }
+  rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/player"
+    };
+  }
 }
 
 message HealthCheckResponse {}
@@ -22,12 +32,29 @@ message HealthCheckResponse {}
 message HealthCheckRequest {}
 
 message CreateUserRequest {
-  int64 id = 1;
-  string name = 2;
-  string tigr_id = 3;
-  int64  rating = 4;
+  string name = 1;
+  string tigr_id = 2;
+  int64  rating = 3;
 }
 
 message CreateUserResponse {
 
+}
+
+message CreateTournamentResponse {
+
+}
+
+message CreateTournamentRequest {
+  string name = 1;
+  string date = 2;
+}
+
+message CreatePlayerRequest {
+  string TournamentId = 1;
+  string UserId = 2;
+  int64 MacMahon = 3;
+}
+
+message CreatePlayerResponse {
 }

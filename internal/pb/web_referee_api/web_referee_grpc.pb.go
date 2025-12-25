@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WebRefereeService_HealthCheck_FullMethodName = "/web.referee.service.v1.WebRefereeService/HealthCheck"
-	WebRefereeService_CreateUser_FullMethodName  = "/web.referee.service.v1.WebRefereeService/CreateUser"
+	WebRefereeService_HealthCheck_FullMethodName      = "/web.referee.service.v1.WebRefereeService/HealthCheck"
+	WebRefereeService_CreateUser_FullMethodName       = "/web.referee.service.v1.WebRefereeService/CreateUser"
+	WebRefereeService_CreateTournament_FullMethodName = "/web.referee.service.v1.WebRefereeService/CreateTournament"
+	WebRefereeService_CreatePlayer_FullMethodName     = "/web.referee.service.v1.WebRefereeService/CreatePlayer"
 )
 
 // WebRefereeServiceClient is the client API for WebRefereeService service.
@@ -29,6 +31,8 @@ const (
 type WebRefereeServiceClient interface {
 	HealthCheck(ctx context.Context, in *HealthCheckRequest, opts ...grpc.CallOption) (*HealthCheckResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	CreateTournament(ctx context.Context, in *CreateTournamentRequest, opts ...grpc.CallOption) (*CreateTournamentResponse, error)
+	CreatePlayer(ctx context.Context, in *CreatePlayerRequest, opts ...grpc.CallOption) (*CreatePlayerResponse, error)
 }
 
 type webRefereeServiceClient struct {
@@ -59,12 +63,34 @@ func (c *webRefereeServiceClient) CreateUser(ctx context.Context, in *CreateUser
 	return out, nil
 }
 
+func (c *webRefereeServiceClient) CreateTournament(ctx context.Context, in *CreateTournamentRequest, opts ...grpc.CallOption) (*CreateTournamentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTournamentResponse)
+	err := c.cc.Invoke(ctx, WebRefereeService_CreateTournament_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webRefereeServiceClient) CreatePlayer(ctx context.Context, in *CreatePlayerRequest, opts ...grpc.CallOption) (*CreatePlayerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePlayerResponse)
+	err := c.cc.Invoke(ctx, WebRefereeService_CreatePlayer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WebRefereeServiceServer is the server API for WebRefereeService service.
 // All implementations must embed UnimplementedWebRefereeServiceServer
 // for forward compatibility.
 type WebRefereeServiceServer interface {
 	HealthCheck(context.Context, *HealthCheckRequest) (*HealthCheckResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	CreateTournament(context.Context, *CreateTournamentRequest) (*CreateTournamentResponse, error)
+	CreatePlayer(context.Context, *CreatePlayerRequest) (*CreatePlayerResponse, error)
 	mustEmbedUnimplementedWebRefereeServiceServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedWebRefereeServiceServer) HealthCheck(context.Context, *Health
 }
 func (UnimplementedWebRefereeServiceServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedWebRefereeServiceServer) CreateTournament(context.Context, *CreateTournamentRequest) (*CreateTournamentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateTournament not implemented")
+}
+func (UnimplementedWebRefereeServiceServer) CreatePlayer(context.Context, *CreatePlayerRequest) (*CreatePlayerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePlayer not implemented")
 }
 func (UnimplementedWebRefereeServiceServer) mustEmbedUnimplementedWebRefereeServiceServer() {}
 func (UnimplementedWebRefereeServiceServer) testEmbeddedByValue()                           {}
@@ -138,6 +170,42 @@ func _WebRefereeService_CreateUser_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WebRefereeService_CreateTournament_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTournamentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebRefereeServiceServer).CreateTournament(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WebRefereeService_CreateTournament_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebRefereeServiceServer).CreateTournament(ctx, req.(*CreateTournamentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebRefereeService_CreatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePlayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebRefereeServiceServer).CreatePlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WebRefereeService_CreatePlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebRefereeServiceServer).CreatePlayer(ctx, req.(*CreatePlayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WebRefereeService_ServiceDesc is the grpc.ServiceDesc for WebRefereeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var WebRefereeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateUser",
 			Handler:    _WebRefereeService_CreateUser_Handler,
+		},
+		{
+			MethodName: "CreateTournament",
+			Handler:    _WebRefereeService_CreateTournament_Handler,
+		},
+		{
+			MethodName: "CreatePlayer",
+			Handler:    _WebRefereeService_CreatePlayer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

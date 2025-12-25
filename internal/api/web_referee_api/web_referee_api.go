@@ -9,6 +9,8 @@ import (
 type WebRefereeService interface {
 	HealthCheck(ctx context.Context) error
 	CreateUser(ctx context.Context, user *models.User) error
+	CreateTournament(ctx context.Context, tournament *models.Tournament) error
+	CreatePlayer(ctx context.Context, player *models.Player) error
 }
 
 type WebRefereeServiceAPI struct {
