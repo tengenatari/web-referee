@@ -7,9 +7,9 @@ import (
 
 func (suite *WebRefereeServiceAPISuite) TestCreateUser() {
 
-	req := &web_referee_api.HealthCheckRequest{}
+	req := &web_referee_api.CreateUserRequest{}
 
-	suite.webRefereeService.On("HealthCheck", suite.ctx).
+	suite.webRefereeService.On("CreateUser", suite.ctx).
 		Return(nil).
 		Once()
 	check, err := suite.webRefereeServiceAPI.HealthCheck(suite.ctx, req)
