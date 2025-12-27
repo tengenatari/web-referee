@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -20,13 +21,92 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Game struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	White         string                 `protobuf:"bytes,2,opt,name=White,proto3" json:"White,omitempty"`
+	Black         string                 `protobuf:"bytes,3,opt,name=Black,proto3" json:"Black,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Game) Reset() {
+	*x = Game{}
+	mi := &file_models_models_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Game) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Game) ProtoMessage() {}
+
+func (x *Game) ProtoReflect() protoreflect.Message {
+	mi := &file_models_models_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Game.ProtoReflect.Descriptor instead.
+func (*Game) Descriptor() ([]byte, []int) {
+	return file_models_models_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Game) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Game) GetWhite() string {
+	if x != nil {
+		return x.White
+	}
+	return ""
+}
+
+func (x *Game) GetBlack() string {
+	if x != nil {
+		return x.Black
+	}
+	return ""
+}
+
 var File_models_models_proto protoreflect.FileDescriptor
 
 const file_models_models_proto_rawDesc = "" +
 	"\n" +
-	"\x13models/models.proto\x12\x12students.models.v1B7Z5github.com/tengenatari/web-referee/internal/pb/modelsb\x06proto3"
+	"\x13models/models.proto\x12\x15web.referee.models.v1\"B\n" +
+	"\x04Game\x12\x0e\n" +
+	"\x02Id\x18\x01 \x01(\tR\x02Id\x12\x14\n" +
+	"\x05White\x18\x02 \x01(\tR\x05White\x12\x14\n" +
+	"\x05Black\x18\x03 \x01(\tR\x05BlackB7Z5github.com/tengenatari/web-referee/internal/pb/modelsb\x06proto3"
 
-var file_models_models_proto_goTypes = []any{}
+var (
+	file_models_models_proto_rawDescOnce sync.Once
+	file_models_models_proto_rawDescData []byte
+)
+
+func file_models_models_proto_rawDescGZIP() []byte {
+	file_models_models_proto_rawDescOnce.Do(func() {
+		file_models_models_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_models_models_proto_rawDesc), len(file_models_models_proto_rawDesc)))
+	})
+	return file_models_models_proto_rawDescData
+}
+
+var file_models_models_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_models_models_proto_goTypes = []any{
+	(*Game)(nil), // 0: web.referee.models.v1.Game
+}
 var file_models_models_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
@@ -46,12 +126,13 @@ func file_models_models_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_models_proto_rawDesc), len(file_models_models_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_models_models_proto_goTypes,
 		DependencyIndexes: file_models_models_proto_depIdxs,
+		MessageInfos:      file_models_models_proto_msgTypes,
 	}.Build()
 	File_models_models_proto = out.File
 	file_models_models_proto_goTypes = nil

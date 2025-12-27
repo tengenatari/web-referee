@@ -28,6 +28,16 @@ type Player struct {
 	UserId       uuid.UUID `db:"user_id"`
 }
 
+type Game struct {
+	Id          uuid.UUID `db:"id"`
+	White       uuid.UUID `db:"white"`
+	Black       uuid.UUID `db:"black"`
+	ResultBlack bool      `db:"result_black"`
+	ResultWhite bool      `db:"result_white"`
+	GameUrl     string    `db:"game_url"`
+	TourNum     int64     `db:"tour_num"`
+}
+
 const (
 	UserTable        = "users"
 	UserId           = "id"
@@ -47,4 +57,13 @@ const (
 	PlayerUserId       = "user_id"
 	PlayerMacMahon     = "mac_mahon"
 	PlayerTournamentId = "tournament_id"
+
+	GameTable       = "games"
+	GameTourNum     = "tour_num"
+	GameId          = "id"
+	GameWhite       = "white"
+	GameBlack       = "black"
+	GameResultBlack = "result_black"
+	GameResultWhite = "result_white"
+	GameUrl         = "game_url"
 )

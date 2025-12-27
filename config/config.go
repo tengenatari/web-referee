@@ -11,6 +11,7 @@ type Config struct {
 	Database DatabaseConfig `yaml:"database"`
 	Kafka    KafkaConfig    `yaml:"kafka"`
 	Web      Web            `yaml:"web"`
+	Redis    RedisConfig    `yaml:"redis"`
 }
 
 type DatabaseConfig struct {
@@ -28,6 +29,11 @@ type KafkaConfig struct {
 	Host  string `yaml:"host"`
 	Port  int    `yaml:"port"`
 	Topic string `yaml:"topic"`
+}
+
+type RedisConfig struct {
+	Host string `yaml:"host"`
+	Port int    `yaml:"port"`
 }
 
 type Web struct {

@@ -7,6 +7,7 @@
 package web_referee_api
 
 import (
+	models "github.com/tengenatari/web-referee/internal/pb/models"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -156,6 +157,7 @@ func (x *CreateUserRequest) GetRating() int64 {
 
 type CreateUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserUUID      string                 `protobuf:"bytes,1,opt,name=UserUUID,proto3" json:"UserUUID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -190,10 +192,18 @@ func (*CreateUserResponse) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{3}
 }
 
+func (x *CreateUserResponse) GetUserUUID() string {
+	if x != nil {
+		return x.UserUUID
+	}
+	return ""
+}
+
 type CreateTournamentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TournamentUUID string                 `protobuf:"bytes,1,opt,name=TournamentUUID,proto3" json:"TournamentUUID,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateTournamentResponse) Reset() {
@@ -224,6 +234,13 @@ func (x *CreateTournamentResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateTournamentResponse.ProtoReflect.Descriptor instead.
 func (*CreateTournamentResponse) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateTournamentResponse) GetTournamentUUID() string {
+	if x != nil {
+		return x.TournamentUUID
+	}
+	return ""
 }
 
 type CreateTournamentRequest struct {
@@ -340,6 +357,7 @@ func (x *CreatePlayerRequest) GetMacMahon() int64 {
 
 type CreatePlayerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	PlayerUUID    string                 `protobuf:"bytes,1,opt,name=PlayerUUID,proto3" json:"PlayerUUID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -374,33 +392,223 @@ func (*CreatePlayerResponse) Descriptor() ([]byte, []int) {
 	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *CreatePlayerResponse) GetPlayerUUID() string {
+	if x != nil {
+		return x.PlayerUUID
+	}
+	return ""
+}
+
+type CreatePairingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TournamentId  string                 `protobuf:"bytes,1,opt,name=TournamentId,proto3" json:"TournamentId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatePairingRequest) Reset() {
+	*x = CreatePairingRequest{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePairingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePairingRequest) ProtoMessage() {}
+
+func (x *CreatePairingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePairingRequest.ProtoReflect.Descriptor instead.
+func (*CreatePairingRequest) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CreatePairingRequest) GetTournamentId() string {
+	if x != nil {
+		return x.TournamentId
+	}
+	return ""
+}
+
+type CreatePairingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreatePairingResponse) Reset() {
+	*x = CreatePairingResponse{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePairingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePairingResponse) ProtoMessage() {}
+
+func (x *CreatePairingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePairingResponse.ProtoReflect.Descriptor instead.
+func (*CreatePairingResponse) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{9}
+}
+
+type GetPairingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TournamentId  string                 `protobuf:"bytes,1,opt,name=TournamentId,proto3" json:"TournamentId,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPairingRequest) Reset() {
+	*x = GetPairingRequest{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPairingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPairingRequest) ProtoMessage() {}
+
+func (x *GetPairingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPairingRequest.ProtoReflect.Descriptor instead.
+func (*GetPairingRequest) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetPairingRequest) GetTournamentId() string {
+	if x != nil {
+		return x.TournamentId
+	}
+	return ""
+}
+
+type GetPairingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Games         []*models.Game         `protobuf:"bytes,1,rep,name=games,proto3" json:"games,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPairingResponse) Reset() {
+	*x = GetPairingResponse{}
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPairingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPairingResponse) ProtoMessage() {}
+
+func (x *GetPairingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_web_referee_api_web_referee_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPairingResponse.ProtoReflect.Descriptor instead.
+func (*GetPairingResponse) Descriptor() ([]byte, []int) {
+	return file_web_referee_api_web_referee_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetPairingResponse) GetGames() []*models.Game {
+	if x != nil {
+		return x.Games
+	}
+	return nil
+}
+
 var File_web_referee_api_web_referee_proto protoreflect.FileDescriptor
 
 const file_web_referee_api_web_referee_proto_rawDesc = "" +
 	"\n" +
-	"!web_referee_api/web_referee.proto\x12\x16web.referee.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x15\n" +
+	"!web_referee_api/web_referee.proto\x12\x16web.referee.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13models/models.proto\"\x15\n" +
 	"\x13HealthCheckResponse\"\x14\n" +
 	"\x12HealthCheckRequest\"X\n" +
 	"\x11CreateUserRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\atigr_id\x18\x02 \x01(\tR\x06tigrId\x12\x16\n" +
-	"\x06rating\x18\x03 \x01(\x03R\x06rating\"\x14\n" +
-	"\x12CreateUserResponse\"\x1a\n" +
-	"\x18CreateTournamentResponse\"A\n" +
+	"\x06rating\x18\x03 \x01(\x03R\x06rating\"0\n" +
+	"\x12CreateUserResponse\x12\x1a\n" +
+	"\bUserUUID\x18\x01 \x01(\tR\bUserUUID\"B\n" +
+	"\x18CreateTournamentResponse\x12&\n" +
+	"\x0eTournamentUUID\x18\x01 \x01(\tR\x0eTournamentUUID\"A\n" +
 	"\x17CreateTournamentRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04date\x18\x02 \x01(\tR\x04date\"m\n" +
 	"\x13CreatePlayerRequest\x12\"\n" +
 	"\fTournamentId\x18\x01 \x01(\tR\fTournamentId\x12\x16\n" +
 	"\x06UserId\x18\x02 \x01(\tR\x06UserId\x12\x1a\n" +
-	"\bMacMahon\x18\x03 \x01(\x03R\bMacMahon\"\x16\n" +
-	"\x14CreatePlayerResponse2\xad\x04\n" +
+	"\bMacMahon\x18\x03 \x01(\x03R\bMacMahon\"6\n" +
+	"\x14CreatePlayerResponse\x12\x1e\n" +
+	"\n" +
+	"PlayerUUID\x18\x01 \x01(\tR\n" +
+	"PlayerUUID\":\n" +
+	"\x14CreatePairingRequest\x12\"\n" +
+	"\fTournamentId\x18\x01 \x01(\tR\fTournamentId\"\x17\n" +
+	"\x15CreatePairingResponse\"7\n" +
+	"\x11GetPairingRequest\x12\"\n" +
+	"\fTournamentId\x18\x01 \x01(\tR\fTournamentId\"G\n" +
+	"\x12GetPairingResponse\x121\n" +
+	"\x05games\x18\x01 \x03(\v2\x1b.web.referee.models.v1.GameR\x05games2\xb3\x06\n" +
 	"\x11WebRefereeService\x12\x84\x01\n" +
 	"\vHealthCheck\x12*.web.referee.service.v1.HealthCheckRequest\x1a+.web.referee.service.v1.HealthCheckResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/v1/health-check\x12y\n" +
 	"\n" +
 	"CreateUser\x12).web.referee.service.v1.CreateUserRequest\x1a*.web.referee.service.v1.CreateUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\"\f/api/v1/user\x12\x91\x01\n" +
 	"\x10CreateTournament\x12/.web.referee.service.v1.CreateTournamentRequest\x1a0.web.referee.service.v1.CreateTournamentResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x12/api/v1/tournament\x12\x81\x01\n" +
-	"\fCreatePlayer\x12+.web.referee.service.v1.CreatePlayerRequest\x1a,.web.referee.service.v1.CreatePlayerResponse\"\x16\x82\xd3\xe4\x93\x02\x10\"\x0e/api/v1/playerBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
+	"\fCreatePlayer\x12+.web.referee.service.v1.CreatePlayerRequest\x1a,.web.referee.service.v1.CreatePlayerResponse\"\x16\x82\xd3\xe4\x93\x02\x10\"\x0e/api/v1/player\x12\x85\x01\n" +
+	"\rCreatePairing\x12,.web.referee.service.v1.CreatePairingRequest\x1a-.web.referee.service.v1.CreatePairingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/api/v1/pairing\x12|\n" +
+	"\n" +
+	"GetPairing\x12).web.referee.service.v1.GetPairingRequest\x1a*.web.referee.service.v1.GetPairingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/api/v1/pairingBPZNgithub.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_apib\x06proto3"
 
 var (
 	file_web_referee_api_web_referee_proto_rawDescOnce sync.Once
@@ -414,7 +622,7 @@ func file_web_referee_api_web_referee_proto_rawDescGZIP() []byte {
 	return file_web_referee_api_web_referee_proto_rawDescData
 }
 
-var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_web_referee_api_web_referee_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_web_referee_api_web_referee_proto_goTypes = []any{
 	(*HealthCheckResponse)(nil),      // 0: web.referee.service.v1.HealthCheckResponse
 	(*HealthCheckRequest)(nil),       // 1: web.referee.service.v1.HealthCheckRequest
@@ -424,21 +632,31 @@ var file_web_referee_api_web_referee_proto_goTypes = []any{
 	(*CreateTournamentRequest)(nil),  // 5: web.referee.service.v1.CreateTournamentRequest
 	(*CreatePlayerRequest)(nil),      // 6: web.referee.service.v1.CreatePlayerRequest
 	(*CreatePlayerResponse)(nil),     // 7: web.referee.service.v1.CreatePlayerResponse
+	(*CreatePairingRequest)(nil),     // 8: web.referee.service.v1.CreatePairingRequest
+	(*CreatePairingResponse)(nil),    // 9: web.referee.service.v1.CreatePairingResponse
+	(*GetPairingRequest)(nil),        // 10: web.referee.service.v1.GetPairingRequest
+	(*GetPairingResponse)(nil),       // 11: web.referee.service.v1.GetPairingResponse
+	(*models.Game)(nil),              // 12: web.referee.models.v1.Game
 }
 var file_web_referee_api_web_referee_proto_depIdxs = []int32{
-	1, // 0: web.referee.service.v1.WebRefereeService.HealthCheck:input_type -> web.referee.service.v1.HealthCheckRequest
-	2, // 1: web.referee.service.v1.WebRefereeService.CreateUser:input_type -> web.referee.service.v1.CreateUserRequest
-	5, // 2: web.referee.service.v1.WebRefereeService.CreateTournament:input_type -> web.referee.service.v1.CreateTournamentRequest
-	6, // 3: web.referee.service.v1.WebRefereeService.CreatePlayer:input_type -> web.referee.service.v1.CreatePlayerRequest
-	0, // 4: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
-	3, // 5: web.referee.service.v1.WebRefereeService.CreateUser:output_type -> web.referee.service.v1.CreateUserResponse
-	4, // 6: web.referee.service.v1.WebRefereeService.CreateTournament:output_type -> web.referee.service.v1.CreateTournamentResponse
-	7, // 7: web.referee.service.v1.WebRefereeService.CreatePlayer:output_type -> web.referee.service.v1.CreatePlayerResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	12, // 0: web.referee.service.v1.GetPairingResponse.games:type_name -> web.referee.models.v1.Game
+	1,  // 1: web.referee.service.v1.WebRefereeService.HealthCheck:input_type -> web.referee.service.v1.HealthCheckRequest
+	2,  // 2: web.referee.service.v1.WebRefereeService.CreateUser:input_type -> web.referee.service.v1.CreateUserRequest
+	5,  // 3: web.referee.service.v1.WebRefereeService.CreateTournament:input_type -> web.referee.service.v1.CreateTournamentRequest
+	6,  // 4: web.referee.service.v1.WebRefereeService.CreatePlayer:input_type -> web.referee.service.v1.CreatePlayerRequest
+	8,  // 5: web.referee.service.v1.WebRefereeService.CreatePairing:input_type -> web.referee.service.v1.CreatePairingRequest
+	10, // 6: web.referee.service.v1.WebRefereeService.GetPairing:input_type -> web.referee.service.v1.GetPairingRequest
+	0,  // 7: web.referee.service.v1.WebRefereeService.HealthCheck:output_type -> web.referee.service.v1.HealthCheckResponse
+	3,  // 8: web.referee.service.v1.WebRefereeService.CreateUser:output_type -> web.referee.service.v1.CreateUserResponse
+	4,  // 9: web.referee.service.v1.WebRefereeService.CreateTournament:output_type -> web.referee.service.v1.CreateTournamentResponse
+	7,  // 10: web.referee.service.v1.WebRefereeService.CreatePlayer:output_type -> web.referee.service.v1.CreatePlayerResponse
+	9,  // 11: web.referee.service.v1.WebRefereeService.CreatePairing:output_type -> web.referee.service.v1.CreatePairingResponse
+	11, // 12: web.referee.service.v1.WebRefereeService.GetPairing:output_type -> web.referee.service.v1.GetPairingResponse
+	7,  // [7:13] is the sub-list for method output_type
+	1,  // [1:7] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_web_referee_api_web_referee_proto_init() }
@@ -452,7 +670,7 @@ func file_web_referee_api_web_referee_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_web_referee_api_web_referee_proto_rawDesc), len(file_web_referee_api_web_referee_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

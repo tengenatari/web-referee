@@ -13,9 +13,9 @@ func (s *WebRefereeServiceAPI) CreateUser(ctx context.Context, req *web_referee_
 		Name:   req.GetName(),
 		TigrId: req.GetTigrId(),
 	}
-	err := s.webRefereeService.CreateUser(ctx, &user)
+	uuid, err := s.webRefereeService.CreateUser(ctx, &user)
 	if err != nil {
 		return nil, err
 	}
-	return &web_referee_api.CreateUserResponse{}, nil
+	return &web_referee_api.CreateUserResponse{UserUUID: uuid}, nil
 }

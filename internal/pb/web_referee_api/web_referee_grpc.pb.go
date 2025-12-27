@@ -23,6 +23,8 @@ const (
 	WebRefereeService_CreateUser_FullMethodName       = "/web.referee.service.v1.WebRefereeService/CreateUser"
 	WebRefereeService_CreateTournament_FullMethodName = "/web.referee.service.v1.WebRefereeService/CreateTournament"
 	WebRefereeService_CreatePlayer_FullMethodName     = "/web.referee.service.v1.WebRefereeService/CreatePlayer"
+	WebRefereeService_CreatePairing_FullMethodName    = "/web.referee.service.v1.WebRefereeService/CreatePairing"
+	WebRefereeService_GetPairing_FullMethodName       = "/web.referee.service.v1.WebRefereeService/GetPairing"
 )
 
 // WebRefereeServiceClient is the client API for WebRefereeService service.
@@ -33,6 +35,8 @@ type WebRefereeServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	CreateTournament(ctx context.Context, in *CreateTournamentRequest, opts ...grpc.CallOption) (*CreateTournamentResponse, error)
 	CreatePlayer(ctx context.Context, in *CreatePlayerRequest, opts ...grpc.CallOption) (*CreatePlayerResponse, error)
+	CreatePairing(ctx context.Context, in *CreatePairingRequest, opts ...grpc.CallOption) (*CreatePairingResponse, error)
+	GetPairing(ctx context.Context, in *GetPairingRequest, opts ...grpc.CallOption) (*GetPairingResponse, error)
 }
 
 type webRefereeServiceClient struct {
@@ -83,6 +87,26 @@ func (c *webRefereeServiceClient) CreatePlayer(ctx context.Context, in *CreatePl
 	return out, nil
 }
 
+func (c *webRefereeServiceClient) CreatePairing(ctx context.Context, in *CreatePairingRequest, opts ...grpc.CallOption) (*CreatePairingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePairingResponse)
+	err := c.cc.Invoke(ctx, WebRefereeService_CreatePairing_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webRefereeServiceClient) GetPairing(ctx context.Context, in *GetPairingRequest, opts ...grpc.CallOption) (*GetPairingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPairingResponse)
+	err := c.cc.Invoke(ctx, WebRefereeService_GetPairing_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WebRefereeServiceServer is the server API for WebRefereeService service.
 // All implementations must embed UnimplementedWebRefereeServiceServer
 // for forward compatibility.
@@ -91,6 +115,8 @@ type WebRefereeServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	CreateTournament(context.Context, *CreateTournamentRequest) (*CreateTournamentResponse, error)
 	CreatePlayer(context.Context, *CreatePlayerRequest) (*CreatePlayerResponse, error)
+	CreatePairing(context.Context, *CreatePairingRequest) (*CreatePairingResponse, error)
+	GetPairing(context.Context, *GetPairingRequest) (*GetPairingResponse, error)
 	mustEmbedUnimplementedWebRefereeServiceServer()
 }
 
@@ -112,6 +138,12 @@ func (UnimplementedWebRefereeServiceServer) CreateTournament(context.Context, *C
 }
 func (UnimplementedWebRefereeServiceServer) CreatePlayer(context.Context, *CreatePlayerRequest) (*CreatePlayerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreatePlayer not implemented")
+}
+func (UnimplementedWebRefereeServiceServer) CreatePairing(context.Context, *CreatePairingRequest) (*CreatePairingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePairing not implemented")
+}
+func (UnimplementedWebRefereeServiceServer) GetPairing(context.Context, *GetPairingRequest) (*GetPairingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPairing not implemented")
 }
 func (UnimplementedWebRefereeServiceServer) mustEmbedUnimplementedWebRefereeServiceServer() {}
 func (UnimplementedWebRefereeServiceServer) testEmbeddedByValue()                           {}
@@ -206,6 +238,42 @@ func _WebRefereeService_CreatePlayer_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WebRefereeService_CreatePairing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePairingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebRefereeServiceServer).CreatePairing(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WebRefereeService_CreatePairing_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebRefereeServiceServer).CreatePairing(ctx, req.(*CreatePairingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebRefereeService_GetPairing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPairingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebRefereeServiceServer).GetPairing(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WebRefereeService_GetPairing_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebRefereeServiceServer).GetPairing(ctx, req.(*GetPairingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WebRefereeService_ServiceDesc is the grpc.ServiceDesc for WebRefereeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +296,14 @@ var WebRefereeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreatePlayer",
 			Handler:    _WebRefereeService_CreatePlayer_Handler,
+		},
+		{
+			MethodName: "CreatePairing",
+			Handler:    _WebRefereeService_CreatePairing_Handler,
+		},
+		{
+			MethodName: "GetPairing",
+			Handler:    _WebRefereeService_GetPairing_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

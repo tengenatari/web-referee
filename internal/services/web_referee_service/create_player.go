@@ -6,10 +6,10 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (service *WebRefereeService) CreatePlayer(ctx context.Context, player *models.Player) error {
-	err := service.webRefereeStorage.CreatePlayer(ctx, player)
+func (service *WebRefereeService) CreatePlayer(ctx context.Context, player *models.Player) (string, error) {
+	playerUUID, err := service.webRefereeStorage.CreatePlayer(ctx, player)
 	if err != nil {
-		return errors.Wrap(err, "failed to create player")
+		return "", errors.Wrap(err, "failed to create player")
 	}
-	return nil
+	return playerUUID.String(), nil
 }

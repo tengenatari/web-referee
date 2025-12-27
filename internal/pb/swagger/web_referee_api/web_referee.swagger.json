@@ -38,6 +38,64 @@
         ]
       }
     },
+    "/api/v1/pairing": {
+      "get": {
+        "operationId": "WebRefereeService_GetPairing",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPairingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "TournamentId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WebRefereeService"
+        ]
+      },
+      "post": {
+        "operationId": "WebRefereeService_CreatePairing",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreatePairingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "TournamentId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "WebRefereeService"
+        ]
+      }
+    },
     "/api/v1/player": {
       "post": {
         "operationId": "WebRefereeService_CreatePlayer",
@@ -190,14 +248,58 @@
         }
       }
     },
-    "v1CreatePlayerResponse": {
+    "v1CreatePairingResponse": {
       "type": "object"
+    },
+    "v1CreatePlayerResponse": {
+      "type": "object",
+      "properties": {
+        "PlayerUUID": {
+          "type": "string"
+        }
+      }
     },
     "v1CreateTournamentResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "TournamentUUID": {
+          "type": "string"
+        }
+      }
     },
     "v1CreateUserResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "UserUUID": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Game": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "White": {
+          "type": "string"
+        },
+        "Black": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetPairingResponse": {
+      "type": "object",
+      "properties": {
+        "games": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Game"
+          }
+        }
+      }
     },
     "v1HealthCheckResponse": {
       "type": "object"

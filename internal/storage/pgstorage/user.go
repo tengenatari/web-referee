@@ -17,11 +17,11 @@ func (storage *WebRefereeStorage) getUserShard(user *User) (uint32, error) {
 	return (user.Id.ID())%storage.shards + 1, nil
 }
 
-func (storage *WebRefereeStorage) CreateUser(ctx context.Context, user *models.User) error {
+func (storage *WebRefereeStorage) CreateUser(ctx context.Context, user *models.User) (uuid.UUID, error) {
 
 	userUuid, err := uuid.NewV7()
 	if err != nil {
-		return errors.Wrap(err, "error creating user uuid")
+		return uuid.Nil, errors.Wrap(err, "error creating user uuid")
 	}
 
 	userMapped := User{
@@ -32,7 +32,7 @@ func (storage *WebRefereeStorage) CreateUser(ctx context.Context, user *models.U
 	}
 	shard, err := storage.getUserShard(&userMapped)
 	if err != nil {
-		return errors.Wrap(err, "error getting user shard")
+		return uuid.Nil, errors.Wrap(err, "error getting user shard")
 	}
 	fmt.Println(userUuid, shard)
 
@@ -41,7 +41,7 @@ func (storage *WebRefereeStorage) CreateUser(ctx context.Context, user *models.U
 		PlaceholderFormat(squirrel.Dollar)
 	err = storage.execQuery(ctx, q)
 	if err != nil {
-		return errors.Wrap(err, "Failed to create user")
+		return uuid.Nil, errors.Wrap(err, "Failed to create user")
 	}
-	return nil
+	return userUuid, nil
 }

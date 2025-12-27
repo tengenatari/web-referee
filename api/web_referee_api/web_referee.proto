@@ -3,7 +3,7 @@ package web.referee.service.v1;
 option go_package = "github.com/tengenatari/web-referee/internal/pb/web_referee_api;web_referee_api";
 
 import "google/api/annotations.proto";
-
+import "models/models.proto";
 service WebRefereeService {
   rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {
     option (google.api.http) = {
@@ -25,6 +25,16 @@ service WebRefereeService {
       post: "/api/v1/player"
     };
   }
+  rpc CreatePairing(CreatePairingRequest) returns (CreatePairingResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/pairing"
+    };
+  }
+  rpc GetPairing(GetPairingRequest) returns (GetPairingResponse){
+    option(google.api.http) = {
+      get: "/api/v1/pairing"
+    };
+  }
 }
 
 message HealthCheckResponse {}
@@ -38,11 +48,11 @@ message CreateUserRequest {
 }
 
 message CreateUserResponse {
-
+  string UserUUID = 1;
 }
 
 message CreateTournamentResponse {
-
+  string TournamentUUID = 1;
 }
 
 message CreateTournamentRequest {
@@ -57,4 +67,21 @@ message CreatePlayerRequest {
 }
 
 message CreatePlayerResponse {
+  string PlayerUUID = 1;
 }
+
+message CreatePairingRequest {
+  string TournamentId = 1;
+}
+
+message CreatePairingResponse {
+}
+
+message GetPairingRequest {
+  string TournamentId = 1;
+}
+
+message GetPairingResponse{
+  repeated web.referee.models.v1.Game games = 1;
+}
+

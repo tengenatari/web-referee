@@ -8,14 +8,14 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (s *WebRefereeServiceAPI) CreatePLayer(ctx context.Context, req *web_referee_api.CreatePlayerRequest) error {
+func (s *WebRefereeServiceAPI) CreatePlayer(ctx context.Context, req *web_referee_api.CreatePlayerRequest) (*web_referee_api.CreatePlayerResponse, error) {
 	tournamentUUID, err := uuid.Parse(req.TournamentId)
 	if err != nil {
-		return errors.Wrap(err, "error parsing tournament id")
+		return nil, errors.Wrap(err, "error parsing tournament id")
 	}
 	userUUID, err := uuid.Parse(req.UserId)
 	if err != nil {
-		return errors.Wrap(err, "error parsing user id")
+		return nil, errors.Wrap(err, "error parsing user id")
 	}
 
 	player := &models.Player{
@@ -24,9 +24,9 @@ func (s *WebRefereeServiceAPI) CreatePLayer(ctx context.Context, req *web_refere
 		MacMahon:     req.MacMahon,
 	}
 
-	err = s.webRefereeService.CreatePlayer(ctx, player)
+	playerUUID, err := s.webRefereeService.CreatePlayer(ctx, player)
 	if err != nil {
-		return errors.Wrap(err, "CreatePlayer failed")
+		return nil, errors.Wrap(err, "CreatePlayer failed")
 	}
-	return nil
+	return &web_referee_api.CreatePlayerResponse{PlayerUUID: playerUUID}, nil
 }

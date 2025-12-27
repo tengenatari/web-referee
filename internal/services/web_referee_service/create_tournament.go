@@ -8,16 +8,17 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (service *WebRefereeService) CreateTournament(ctx context.Context, tournament *models.Tournament) error {
+func (service *WebRefereeService) CreateTournament(ctx context.Context, tournament *models.Tournament) (string, error) {
 	err := validateTournament(ctx, tournament)
 	if err != nil {
-		return errors.Wrap(err, "error validating tournament")
+		return "", errors.Wrap(err, "error validating tournament")
 	}
-	err = service.webRefereeStorage.CreateTournament(ctx, tournament)
+	tournamentUUID, err := service.webRefereeStorage.CreateTournament(ctx, tournament)
+
 	if err != nil {
-		return errors.Wrap(err, "error creating tournament")
+		return "", errors.Wrap(err, "error creating tournament")
 	}
-	return nil
+	return tournamentUUID.String(), nil
 }
 
 func validateTournament(ctx context.Context, tournament *models.Tournament) error {

@@ -14,6 +14,42 @@ type WebRefereeService struct {
 	mock.Mock
 }
 
+// CreatePlayer provides a mock function with given fields: ctx, player
+func (_m *WebRefereeService) CreatePlayer(ctx context.Context, player *models.Player) error {
+	ret := _m.Called(ctx, player)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreatePlayer")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *models.Player) error); ok {
+		r0 = rf(ctx, player)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// CreateTournament provides a mock function with given fields: ctx, tournament
+func (_m *WebRefereeService) CreateTournament(ctx context.Context, tournament *models.Tournament) error {
+	ret := _m.Called(ctx, tournament)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateTournament")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *models.Tournament) error); ok {
+		r0 = rf(ctx, tournament)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // CreateUser provides a mock function with given fields: ctx, user
 func (_m *WebRefereeService) CreateUser(ctx context.Context, user *models.User) error {
 	ret := _m.Called(ctx, user)

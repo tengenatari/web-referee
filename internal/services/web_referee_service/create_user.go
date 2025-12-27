@@ -1,7 +1,6 @@
 package web_referee_service
 
 import (
-	"regexp"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -9,37 +8,29 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (service *WebRefereeService) CreateUser(ctx context.Context, user *models.User) error {
+func (service *WebRefereeService) CreateUser(ctx context.Context, user *models.User) (string, error) {
 
 	err := validateUser(user)
 	if err != nil {
-		return errors.Wrap(err, "validateUser failed")
+		return "", errors.Wrap(err, "validateUser failed")
 	}
 
-	err = service.webRefereeStorage.CreateUser(ctx, user)
+	userUuid, err := service.webRefereeStorage.CreateUser(ctx, user)
 	if err != nil {
-		return errors.Wrap(err, "CreateUser failed")
+		return "", errors.Wrap(err, "CreateUser failed")
 	}
-
+	user.Id = userUuid
 	err = service.webRefereeProducer.ProduceUser(ctx, *user)
 	if err != nil {
-		return errors.Wrap(err, "CreateUser failed")
+		return "", errors.Wrap(err, "CreateUser failed")
 	}
 
-	return nil
+	return userUuid.String(), nil
 }
 
 func validateUser(user *models.User) error {
 	if user == nil {
 		return errors.New("user cannot be nil")
-	}
-
-	if strings.TrimSpace(user.Email) == "" {
-		return errors.New("email is required")
-	}
-
-	if !isValidEmail(user.Email) {
-		return errors.New("invalid email format")
 	}
 
 	if strings.TrimSpace(user.Name) == "" {
@@ -55,9 +46,4 @@ func validateUser(user *models.User) error {
 	}
 
 	return nil
-}
-
-func isValidEmail(email string) bool {
-	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
-	return emailRegex.MatchString(email)
 }

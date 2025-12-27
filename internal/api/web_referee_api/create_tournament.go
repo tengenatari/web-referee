@@ -9,21 +9,21 @@ import (
 	"golang.org/x/net/context"
 )
 
-func (s *WebRefereeServiceAPI) CreateTournament(ctx context.Context, req *web_referee_api.CreateTournamentRequest) error {
+func (s *WebRefereeServiceAPI) CreateTournament(ctx context.Context, req *web_referee_api.CreateTournamentRequest) (*web_referee_api.CreateTournamentResponse, error) {
 
-	parse, err := time.Parse("UTC", req.Date)
+	parse, err := time.Parse(time.RFC3339, req.Date)
 	if err != nil {
-		return errors.Wrap(err, "failed to parse date")
+		return nil, errors.Wrap(err, "failed to parse date")
 	}
 	tournament := &models.Tournament{
 		Name: req.Name,
 		Date: parse,
 	}
 
-	err = s.webRefereeService.CreateTournament(ctx, tournament)
+	tournamentUUID, err := s.webRefereeService.CreateTournament(ctx, tournament)
 	if err != nil {
-		return errors.Wrap(err, "CreateTournament failed")
+		return nil, errors.Wrap(err, "CreateTournament failed")
 	}
 
-	return nil
+	return &web_referee_api.CreateTournamentResponse{TournamentUUID: tournamentUUID}, nil
 }

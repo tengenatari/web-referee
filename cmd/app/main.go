@@ -14,7 +14,8 @@ func main() {
 	}
 	storage := bootstrap.InitPGStorage(cfg)
 	producer := bootstrap.InitMessageProducer(cfg)
-	service := bootstrap.InitWebRefereeService(storage, producer)
+	cache := bootstrap.InitRedis(cfg)
+	service := bootstrap.InitWebRefereeService(storage, producer, cache)
 	api := bootstrap.InitWebRefereeServiceAPI(service)
 
 	bootstrap.AppRun(api, cfg)

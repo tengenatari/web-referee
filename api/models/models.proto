@@ -1,4 +1,11 @@
 syntax = "proto3";
 
-package  students.models.v1;
+package  web.referee.models.v1;
 option go_package = "github.com/tengenatari/web-referee/internal/pb/models";
+
+
+message Game {
+  string Id = 1;
+  string White = 2;
+  string Black = 3;
+}
